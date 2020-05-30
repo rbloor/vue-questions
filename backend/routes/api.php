@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', 'UserController@register');
 Route::post('/login', 'UserController@login');
 Route::post('/logout', 'UserController@logout');
+
+Route::apiResource('category', 'CategoryController');
+Route::apiResource('question', 'QuestionController');
+Route::apiResource('question.answer', 'QuestionAnswerController');
