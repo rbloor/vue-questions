@@ -4,7 +4,11 @@ import VueRouter from "vue-router"
 import Home from "../views/Home.vue"
 import Login from "../views/Login.vue"
 import Register from "../views/Register.vue"
+
 import Dashboard from "../views/Dashboard.vue"
+import Practice from "../views/Practice.vue"
+import Quiz from "../views/Quiz.vue"
+import Results from "../views/Results.vue"
 
 Vue.use(VueRouter)
 
@@ -30,6 +34,24 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
+    meta: { authOnly: true }
+  },
+  {
+    path: "/practice",
+    name: "Practice",
+    component: Practice,
+    meta: { authOnly: true }
+  },
+  {
+    path: "/practice/quiz",
+    name: "Quiz",
+    component: Quiz,
+    meta: { authOnly: true }
+  },
+  {
+    path: "/practice/quiz/results",
+    name: "Results",
+    component: Results,
     meta: { authOnly: true }
   }
 ]
