@@ -24,4 +24,4 @@ Route::post('/logout', 'UserController@logout');
 
 Route::apiResource('category', 'CategoryController');
 Route::apiResource('question', 'QuestionController');
-Route::apiResource('question.answer', 'QuestionAnswerController');
+Route::apiResource('answer', 'AnswerController');
