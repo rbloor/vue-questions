@@ -2,15 +2,17 @@
   <v-app>
     <app-navigation></app-navigation>
     <v-content>
-      <router-view></router-view>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </v-content>
     <app-footer></app-footer>
   </v-app>
 </template>
 
 <script>
-import AppNavigation from "@/components/AppNavigation"
-import AppFooter from "@/components/AppFooter"
+import AppNavigation from "@/components/AppNavigation";
+import AppFooter from "@/components/AppFooter";
 
 export default {
   name: "App",
@@ -19,5 +21,5 @@ export default {
     AppNavigation,
     AppFooter
   }
-}
+};
 </script>

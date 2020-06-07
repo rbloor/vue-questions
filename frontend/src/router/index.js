@@ -5,10 +5,14 @@ import Home from "../views/Home.vue"
 import Login from "../views/Login.vue"
 import Register from "../views/Register.vue"
 
-import Dashboard from "../views/Dashboard.vue"
 import Practice from "../views/Practice.vue"
 import Quiz from "../views/Quiz.vue"
 import Results from "../views/Results.vue"
+
+import CategoryList from "../views/Category/CategoryList.vue"
+import QuestionList from "../views/Question/QuestionList.vue"
+import QuestionAdd from "../views/Question/QuestionAdd.vue"
+import QuestionEdit from "../views/Question/QuestionEdit.vue"
 
 Vue.use(VueRouter)
 
@@ -16,7 +20,8 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: { authOnly: true }
   },
   {
     path: "/login",
@@ -31,10 +36,29 @@ const routes = [
     meta: { guestOnly: true }
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
+    path: "/category",
+    name: "CategoryList",
+    component: CategoryList,
     meta: { authOnly: true }
+  },
+  {
+    path: "/question",
+    name: "QuestionList",
+    component: QuestionList,
+    meta: { authOnly: true }
+  },
+  {
+    path: "/question/add",
+    name: "QuestionAdd",
+    component: QuestionAdd,
+    meta: { authOnly: true }
+  },
+  {
+    path: "/question/edit/:id",
+    name: "QuestionEdit",
+    component: QuestionEdit,
+    meta: { authOnly: true },
+    props: true
   },
   {
     path: "/practice",
@@ -63,7 +87,7 @@ const router = new VueRouter({
 })
 
 function isLoggedIn() {
-  return localStorage.getItem("auth")
+  return JSON.parse(localStorage.getItem("user")) !== null
 }
 
 router.beforeEach((to, from, next) => {
@@ -83,7 +107,7 @@ router.beforeEach((to, from, next) => {
     // if not, redirect to login page.
     if (isLoggedIn()) {
       next({
-        path: "/dashboard",
+        path: "/home",
         query: { redirect: to.fullPath }
       })
     } else {

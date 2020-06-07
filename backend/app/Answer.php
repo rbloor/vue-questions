@@ -10,6 +10,10 @@ class Answer extends Model
         'name', 'notes', 'is_correct', 'question_id',
     ];
 
+    protected $casts = [
+        'is_correct' => 'boolean',
+    ];
+
     public function question()
     {
         return $this->belongsTo('App\Question', 'question_id');

@@ -19,11 +19,12 @@ class Question extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'short_name' => $this->short_name,
             'source' => $this->source,
             'type' => $this->type,
             'is_checked' => $this->is_checked,
             'answers' => AnswerResource::collection($this->answers),
-            'category_id' => new CategoryResource($this->category),
+            'category_id' => $this->category_id,
             'user_id' => $this->user_id,
             //'created_at' => $this->created_at,
             //'updated_at' => $this->updated_at

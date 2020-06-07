@@ -9,7 +9,13 @@
           </v-toolbar>
           <v-card-text>
             <v-form>
-              <v-text-field v-model="form.email" :error-messages="errors.email" label="Email" prepend-icon="mdi-email" type="email"></v-text-field>
+              <v-text-field
+                v-model="form.email"
+                :error-messages="errors.email"
+                label="Email"
+                prepend-icon="mdi-email"
+                type="email"
+              ></v-text-field>
               <v-text-field
                 v-model="form.password"
                 :error-messages="errors.password"
@@ -30,8 +36,7 @@
 </template>
 
 <script>
-import User from "../apis/User"
-
+import User from "../apis/User";
 export default {
   data() {
     return {
@@ -40,23 +45,22 @@ export default {
         password: ""
       },
       errors: {}
-    }
+    };
   },
-
   methods: {
     login() {
       User.login(this.form)
-        .then(() => {
-          this.$root.$emit("login", true)
-          localStorage.setItem("auth", "true")
-          this.$router.push({ name: "Dashboard" })
+        .then(response => {
+          this.$root.$emit("login", true);
+          this.$store.dispatch("login", response.data);
+          this.$router.push({ name: "Home" });
         })
-        .catch((error) => {
+        .catch(error => {
           if (error.response.status === 422) {
-            this.errors = error.response.data.errors
+            this.errors = error.response.data.errors;
           }
-        })
+        });
     }
   }
-}
+};
 </script>

@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     questions: [],
-    responses: []
+    responses: [],
+    user: null
   },
   mutations: {
     init(state) {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
       }
       if (localStorage.getItem("responses")) {
         state.responses = JSON.parse(localStorage.getItem("responses"))
+      }
+      if (localStorage.getItem("user")) {
+        state.user = JSON.parse(localStorage.getItem("user"))
       }
     },
     setQuestions(state, questions) {
@@ -32,6 +36,14 @@ export default new Vuex.Store({
     removeResponses(state) {
       state.responses = []
       localStorage.removeItem("responses")
+    },
+    setUser(state, user) {
+      localStorage.setItem("user", JSON.stringify(user))
+      return (state.user = user)
+    },
+    removeUser(state) {
+      state.user = []
+      localStorage.removeItem("user")
     }
   },
   getters: {
@@ -40,6 +52,9 @@ export default new Vuex.Store({
     },
     responses: (state) => {
       return state.responses
+    },
+    user: (state) => {
+      return state.user
     }
   },
   actions: {
@@ -54,6 +69,12 @@ export default new Vuex.Store({
     },
     removeResponses(context) {
       context.commit("removeResponses")
+    },
+    login(context, user) {
+      context.commit("setUser", user)
+    },
+    logout(context) {
+      context.commit("removeUser")
     }
   }
 })

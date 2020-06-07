@@ -35,9 +35,11 @@ class QuestionController extends Controller
             'category_id' => $request->category_id,
             'user_id' => $request->user_id
         ]);
-
-        foreach ($request->answers as $answer) {
-            $question->answers()->save(new Answer($answer));
+        
+        if (isset($request->answers)) {
+            foreach ($request->answers as $answer) {
+                $question->answers()->save(new Answer($answer));
+            }
         }
 
         return new QuestionResource($question);
@@ -52,7 +54,7 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string'],
             'source' => ['required', 'string', 'max:255'],
             'type' => ['required', 'in:single,multiple'],
             'is_checked' => ['boolean'],
@@ -62,11 +64,13 @@ class QuestionController extends Controller
 
         $question = Question::findOrFail($id);
 
-        foreach ($request->answers as $answer) {
-            if (isset($answer['id'])) {
-                Answer::findOrFail($answer['id'])->update($answer);
-            } else {
-                $question->answers()->save(new Answer($answer));
+        if (isset($request->answers)) {
+            foreach ($request->answers as $answer) {
+                if (isset($answer['id'])) {
+                    Answer::findOrFail($answer['id'])->update($answer);
+                } else {
+                    $question->answers()->save(new Answer($answer));
+                }
             }
         }
 
