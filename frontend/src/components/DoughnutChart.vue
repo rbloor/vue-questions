@@ -1,11 +1,39 @@
 <script>
-import { Doughnut } from "vue-chartjs"
+import { Pie } from "vue-chartjs"
 
 export default {
-  extends: Doughnut,
-  props: ["chartData", "chartOptions"],
+  extends: Pie,
+  props: ["data"],
+  data() {
+    return {
+      chartData: {
+        labels: ["Correct", "Incorrect"],
+        datasets: [
+          {
+            backgroundColor: ["#249EBF", "#f87979"],
+            data: this.data
+          }
+        ]
+      },
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: true,
+        legend: {
+          display: false
+        },
+        layout: {
+          padding: {
+            left: 0,
+            right: 0,
+            top: 20,
+            bottom: 20
+          }
+        }
+      }
+    }
+  },
   mounted() {
-    this.renderChart(this.chartData, this.options)
+    this.renderChart(this.chartData, this.chartOptions)
   }
 }
 </script>

@@ -9,8 +9,20 @@
           </v-toolbar>
           <v-card-text>
             <v-form>
-              <v-text-field :error-messages="errors.name" label="Name" v-model="form.name" prepend-icon="mdi-account" type="text"></v-text-field>
-              <v-text-field :error-messages="errors.email" label="Email" v-model="form.email" prepend-icon="mdi-email" type="text"></v-text-field>
+              <v-text-field
+                :error-messages="errors.name"
+                label="Name"
+                v-model="form.name"
+                prepend-icon="mdi-account"
+                type="text"
+              ></v-text-field>
+              <v-text-field
+                :error-messages="errors.email"
+                label="Email"
+                v-model="form.email"
+                prepend-icon="mdi-email"
+                type="text"
+              ></v-text-field>
               <v-text-field
                 :error-messages="errors.password"
                 label="Password"
@@ -38,7 +50,7 @@
 </template>
 
 <script>
-import User from "../apis/User"
+import User from "@/apis/User";
 
 export default {
   data() {
@@ -50,21 +62,21 @@ export default {
         password_confirmation: ""
       },
       errors: []
-    }
+    };
   },
 
   methods: {
     register() {
       User.register(this.form)
         .then(() => {
-          this.$router.push({ name: "Login" })
+          this.$router.push({ name: "Login" });
         })
-        .catch((error) => {
+        .catch(error => {
           if (error.response.status === 422) {
-            this.errors = error.response.data.errors
+            this.errors = error.response.data.errors;
           }
-        })
+        });
     }
   }
-}
+};
 </script>

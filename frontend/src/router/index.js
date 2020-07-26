@@ -1,26 +1,26 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 
-import Home from "../views/Home.vue"
-import Login from "../views/Login.vue"
-import Register from "../views/Register.vue"
+import Login from "@/views/Auth/Login.vue"
+import Register from "@/views/Auth/Register.vue"
+import Dashboard from "@/views/Auth/Dashboard.vue"
 
-import Practice from "../views/Practice.vue"
-import Quiz from "../views/Quiz.vue"
-import Results from "../views/Results.vue"
+import CategoryList from "@/views/Category/CategoryList.vue"
+import QuestionList from "@/views/Question/QuestionList.vue"
+import QuestionAdd from "@/views/Question/QuestionAdd.vue"
+import QuestionEdit from "@/views/Question/QuestionEdit.vue"
 
-import CategoryList from "../views/Category/CategoryList.vue"
-import QuestionList from "../views/Question/QuestionList.vue"
-import QuestionAdd from "../views/Question/QuestionAdd.vue"
-import QuestionEdit from "../views/Question/QuestionEdit.vue"
+import QuizSetup from "@/views/Quiz/QuizSetup.vue"
+import QuizStart from "@/views/Quiz/QuizStart.vue"
+import QuizResults from "@/views/Quiz/QuizResults.vue"
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "Dashboard",
+    component: Dashboard,
     meta: { authOnly: true }
   },
   {
@@ -61,21 +61,21 @@ const routes = [
     props: true
   },
   {
-    path: "/practice",
-    name: "Practice",
-    component: Practice,
+    path: "/quiz",
+    name: "QuizSetup",
+    component: QuizSetup,
     meta: { authOnly: true }
   },
   {
-    path: "/practice/quiz",
-    name: "Quiz",
-    component: Quiz,
+    path: "/quiz/start",
+    name: "QuizStart",
+    component: QuizStart,
     meta: { authOnly: true }
   },
   {
-    path: "/practice/quiz/results",
-    name: "Results",
-    component: Results,
+    path: "/quiz/results",
+    name: "QuizResults",
+    component: QuizResults,
     meta: { authOnly: true }
   }
 ]
